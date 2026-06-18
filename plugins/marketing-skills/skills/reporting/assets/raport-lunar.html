@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="ro"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{client}} — Raport lunar {{month_label}}</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>:root{--bg:#0f1115;--card:#171a21;--ink:#e8eaed;--muted:#9aa0aa;--line:#262b34;--up:#3fb950;--down:#f85149;--accent:#d4a23a}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,Segoe UI,Roboto,Arial,sans-serif;padding:32px}
+  .wrap{max-width:920px;margin:0 auto}header{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:24px}
+  h1{font-size:20px;margin:0}.sub{color:var(--muted);font-size:13px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:20px}
+  .card h2{font-size:14px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:0 0 12px}
+  table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  a{color:var(--accent)}.pill{display:inline-block;padding:2px 8px;border-radius:6px;font-size:12px;font-weight:600}
+  .p1{background:rgba(248,81,73,.15);color:var(--down)}.p2{background:rgba(212,162,58,.15);color:var(--accent)}.p3{background:rgba(63,185,80,.15);color:var(--up)}
+  footer{color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:14px}</style></head><body><div class="wrap">
+<header><h1>{{client}} — Raport lunar</h1><div class="sub">{{month_label}} · comparație față de luna precedentă (MoM)</div></header>
+<div class="card"><h2>Rezumat</h2><table><tbody>
+<tr><td>ROAS (real)</td><td class="num">{{roas}}</td></tr>
+<tr><td>Cheltuieli publicitare</td><td class="num">{{spend}} lei</td></tr>
+<tr><td>Venituri</td><td class="num">{{revenue}} lei</td></tr>
+<tr><td>Marjă de contribuție</td><td class="num">{{margin}} lei</td></tr>
+<tr><td>Comenzi</td><td class="num">{{orders}}</td></tr>
+<tr><td>Clienți noi / CAC</td><td class="num">{{new_customers}} / {{cac}} lei</td></tr>
+<tr><td>LTV : CAC</td><td class="num">{{ltv_cac}}</td></tr>
+</tbody></table></div>
+<div class="card"><h2>Tendință lunară — venituri vs cheltuieli</h2><canvas id="c" height="90"></canvas></div>
+<div class="card"><h2>Cele mai vândute</h2><table><thead><tr><th>Produs</th><th class="num">Comenzi</th><th class="num">Venituri</th><th class="num">Marjă</th></tr></thead><tbody>{{bestsellers}}</tbody></table></div>
+<div class="card"><h2>Stoc nevândut</h2><table><thead><tr><th>Produs</th><th class="num">Comenzi</th><th class="num">Cheltuieli alocate</th></tr></thead><tbody>{{deadstock}}</tbody></table></div>
+<div class="card"><h2>Ce s-a schimbat / Ce facem în continuare</h2><ul>{{actions}}</ul></div>
+<footer>Surse de date: {{sources}} · Generat la {{generated_at}}</footer></div>
+<script>new Chart(document.getElementById('c'),{type:'bar',data:{labels:{{labels}},datasets:[{label:'Venituri',data:{{revenue_series}},backgroundColor:'#d4a23a'},{label:'Cheltuieli',data:{{spend_series}},backgroundColor:'#3a557d'}]},options:{plugins:{legend:{labels:{color:'#9aa0aa'}}},scales:{x:{ticks:{color:'#9aa0aa'},grid:{color:'#262b34'}},y:{ticks:{color:'#9aa0aa'},grid:{color:'#262b34'}}}}});</script>
+</body></html>

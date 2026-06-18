@@ -1,0 +1,12 @@
+{
+  "name": "allsoft-marketplace",
+  "owner": { "name": "Allsoft Agency" },
+  "metadata": { "description": "Allsoft client-marketing toolkit.", "version": "0.1.0" },
+  "plugins": [
+    {
+      "name": "marketing-skills",
+      "source": "./plugins/marketing-skills",
+      "description": "Full marketing toolkit + router, commands, automations. Romanian-first outputs. One front-door command (/mk). Reusable across all clients."
+    }
+  ]
+}

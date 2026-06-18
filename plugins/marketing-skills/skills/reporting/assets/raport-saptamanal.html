@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{client}} — Raport săptămânal {{week_label}}</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<style>
+  :root{--bg:#0f1115;--card:#171a21;--ink:#e8eaed;--muted:#9aa0aa;--line:#262b34;
+        --up:#3fb950;--down:#f85149;--accent:#d4a23a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.5 -apple-system,Segoe UI,Roboto,Arial,sans-serif;padding:32px}
+  .wrap{max-width:920px;margin:0 auto}
+  header{display:flex;justify-content:space-between;align-items:flex-end;
+         border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:24px}
+  h1{font-size:20px;margin:0}
+  .sub{color:var(--muted);font-size:13px}
+  .headline{font-size:34px;font-weight:700;color:var(--accent)}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:24px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+  .kpi .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+  .kpi .val{font-size:22px;font-weight:600;margin-top:4px}
+  .delta{font-size:12px;font-weight:600;margin-top:2px}
+  .delta.up{color:var(--up)} .delta.down{color:var(--down)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:20px}
+  .card h2{font-size:14px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:0 0 12px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+  th{color:var(--muted);font-weight:600}
+  td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  .flag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:12px;font-weight:600}
+  .flag.bad{background:rgba(248,81,73,.15);color:var(--down)}
+  .flag.ok{background:rgba(63,185,80,.15);color:var(--up)}
+  ul.actions{margin:0;padding-left:18px} ul.actions li{margin:6px 0}
+  footer{color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:14px;margin-top:8px}
+</style>
+</head>
+<body><div class="wrap">
+  <header>
+    <div>
+      <h1>{{client}} — Raport săptămânal</h1>
+      <div class="sub">{{date_range}} · {{week_label}}</div>
+    </div>
+    <div style="text-align:right">
+      <div class="sub">ROAS (real, încasat)</div>
+      <div class="headline">{{roas}}</div>
+    </div>
+  </header>
+
+  <div class="kpis">
+    <div class="kpi"><div class="label">Cheltuieli publicitare</div><div class="val">{{spend}} lei</div><div class="delta {{spend_dir}}">{{spend_delta}}</div></div>
+    <div class="kpi"><div class="label">Venituri</div><div class="val">{{revenue}} lei</div><div class="delta {{revenue_dir}}">{{revenue_delta}}</div></div>
+    <div class="kpi"><div class="label">Comenzi</div><div class="val">{{orders}}</div><div class="delta {{orders_dir}}">{{orders_delta}}</div></div>
+    <div class="kpi"><div class="label">CPA</div><div class="val">{{cpa}} lei</div><div class="delta {{cpa_dir}}">{{cpa_delta}}</div></div>
+    <div class="kpi"><div class="label">Valoare medie comandă</div><div class="val">{{aov}} lei</div><div class="delta {{aov_dir}}">{{aov_delta}}</div></div>
+  </div>
+
+  <div class="card">
+    <h2>Tendință — {{trend_metric}}</h2>
+    <canvas id="trend" height="90"></canvas>
+  </div>
+
+  <div class="card">
+    <h2>Pe canale</h2>
+    <table>
+      <thead><tr><th>Canal</th><th class="num">Cheltuieli</th><th class="num">Venituri</th><th class="num">ROAS</th><th>Stare</th></tr></thead>
+      <tbody>{{channel_rows}}
+        <!-- ex: <tr><td>Meta</td><td class="num">2.100 lei</td><td class="num">8.400 lei</td><td class="num">4,0</td><td><span class="flag ok">în țintă</span></td></tr> -->
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Pe produse / ediții</h2>
+    <table>
+      <thead><tr><th>Produs / Ediție</th><th class="num">Comenzi</th><th class="num">Venituri</th><th class="num">Marjă</th></tr></thead>
+      <tbody>{{product_rows}}</tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Ce s-a schimbat / Ce facem în continuare</h2>
+    <ul class="actions">{{actions}}
+      <!-- ex: <li>CPA pe Google a crescut 18% — reducem bugetul pe campania X și testăm 5 reclame noi.</li> -->
+    </ul>
+  </div>
+
+  <footer>Surse de date: {{sources}} · Generat la {{generated_at}}</footer>
+</div>
+<script>
+  // Înlocuiește datele cu valori reale la generare.
+  const labels = {{trend_labels}};   // ex: ["Lun","Mar","Mie","Joi","Vin","Sâm","Dum"]
+  const data   = {{trend_data}};     // ex: [3.8,4.1,3.6,4.4,4.0,3.9,4.2]
+  new Chart(document.getElementById('trend'),{
+    type:'line',
+    data:{labels,datasets:[{data,borderColor:'#d4a23a',backgroundColor:'rgba(212,162,58,.12)',fill:true,tension:.3,pointRadius:3}]},
+    options:{plugins:{legend:{display:false}},
+      scales:{x:{ticks:{color:'#9aa0aa'},grid:{color:'#262b34'}},
+              y:{ticks:{color:'#9aa0aa'},grid:{color:'#262b34'}}}}
+  });
+</script>
+</body></html>
