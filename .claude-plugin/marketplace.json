@@ -1,7 +1,7 @@
 {
   "name": "allsoft-marketplace",
   "owner": { "name": "Allsoft Agency" },
-  "metadata": { "description": "Allsoft client-marketing toolkit.", "version": "0.1.0" },
+  "metadata": { "description": "Allsoft client-marketing toolkit.", "version": "0.3.0" },
   "plugins": [
     {
       "name": "marketing-skills",
