@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="ro"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{prospect}} — Brief de evaluare lead</title><style>:root{--bg:#0f1115;--card:#171a21;--ink:#e8eaed;--muted:#9aa0aa;--line:#262b34;--up:#3fb950;--amber:#d4a23a;--down:#f85149;--accent:#d4a23a}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,Segoe UI,Roboto,Arial,sans-serif;padding:32px}
+  .wrap{max-width:920px;margin:0 auto}header{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:24px}
+  h1{font-size:20px;margin:0}.sub{color:var(--muted);font-size:13px;margin-top:4px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;margin-bottom:20px}
+  .card h2{font-size:14px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:0 0 12px}
+  table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600}td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+  a{color:var(--accent)}.pill{display:inline-block;padding:2px 9px;border-radius:6px;font-size:12px;font-weight:600}
+  .rosu{background:rgba(248,81,73,.15);color:var(--down)}.galben{background:rgba(212,162,58,.15);color:var(--amber)}.verde{background:rgba(63,185,80,.15);color:var(--up)}
+  .p1{background:rgba(248,81,73,.15);color:var(--down)}.p2{background:rgba(212,162,58,.15);color:var(--amber)}.p3{background:rgba(63,185,80,.15);color:var(--up)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grid .item{border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+  .grid .item .lbl{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+  .ipoteza{color:var(--muted);font-style:italic;font-size:12px}
+  ul{margin:6px 0 0;padding-left:18px}li{margin:4px 0}
+  footer{color:var(--muted);font-size:12px;border-top:1px solid var(--line);padding-top:14px}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}</style></head><body><div class="wrap">
+
+<header>
+  <h1>{{prospect}} — Brief de evaluare lead</h1>
+  <div class="sub">Site: <a href="{{website}}">{{website}}</a> · Sursă: {{source}} · Serviciu solicitat: {{requested_service}}</div>
+  <div class="sub">Contact: {{contact}} · Data: {{date}}</div>
+</header>
+
+<!-- 2. SCORECARD -->
+<div class="card"><h2>Scorecard (Roșu / Galben / Verde)</h2><table>
+<thead><tr><th>Dimensiune</th><th>Stare</th><th>Motiv (o linie)</th></tr></thead>
+<tbody>
+<!-- pilule: <span class="pill rosu">Roșu</span> / <span class="pill galben">Galben</span> / <span class="pill verde">Verde</span> -->
+<tr><td>Site / CRO</td><td>{{rag_site}}</td><td>{{rag_site_reason}}</td></tr>
+<tr><td>SEO</td><td>{{rag_seo}}</td><td>{{rag_seo_reason}}</td></tr>
+<tr><td>GEO / căutare AI</td><td>{{rag_geo}}</td><td>{{rag_geo_reason}}</td></tr>
+<tr><td>Pregătire paid</td><td>{{rag_paid}}</td><td>{{rag_paid_reason}}</td></tr>
+<tr><td>Brand</td><td>{{rag_brand}}</td><td>{{rag_brand_reason}}</td></tr>
+<tr><td>Presiune competitivă</td><td>{{rag_competitive}}</td><td>{{rag_competitive_reason}}</td></tr>
+</tbody></table>
+<p style="margin:12px 0 0"><strong>Oportunitate vs. efort:</strong> {{opportunity_vs_effort}}</p></div>
+
+<!-- 3. BUSINESS SNAPSHOT -->
+<div class="card"><h2>Profil business</h2>
+<div class="grid">
+  <div class="item"><div class="lbl">Ce fac</div>{{what_they_do}}</div>
+  <div class="item"><div class="lbl">Nișă</div>{{niche}}</div>
+  <div class="item"><div class="lbl">Audiență</div>{{audience}}</div>
+  <div class="item"><div class="lbl">Poziționare preț</div>{{price_positioning}}</div>
+</div></div>
+
+<!-- 4. STATED VS OBSERVED -->
+<div class="card"><h2>Nevoie declarată vs. observată</h2>
+<p><strong>Declarată:</strong> {{stated_need}}</p>
+<p><strong>Observată (din scan):</strong> {{observed_need}}</p>
+<p><strong>Decalajul (unde e discuția):</strong> {{need_gap}}</p></div>
+
+<!-- 5-7. READS -->
+<div class="card"><h2>Analiză SEO</h2>{{seo_read}}</div>
+<div class="card"><h2>Analiză GEO / căutare AI</h2>{{geo_read}}</div>
+<div class="card"><h2>Analiză CRO / site</h2>{{cro_read}}</div>
+
+<!-- 8. COMPETITIVE -->
+<div class="card"><h2>Peisaj competitiv</h2><table>
+<thead><tr><th>Competitor</th><th>Unde stau bine</th><th>Unde e deschiderea</th></tr></thead>
+<tbody>{{competitors}}
+<!-- ex: <tr><td>...</td><td>...</td><td>...</td></tr> --></tbody></table></div>
+
+<!-- 9. QUICK WINS -->
+<div class="card"><h2>Câștiguri rapide prioritizate</h2><table>
+<thead><tr><th>Prioritate</th><th>Acțiune</th><th>Impact</th><th>Efort</th></tr></thead>
+<tbody>{{quick_wins}}
+<!-- ex: <tr><td><span class="pill p1">Mare</span></td><td>...</td><td>...</td><td>...</td></tr> --></tbody></table></div>
+
+<!-- 10. RECOMMENDED ENGAGEMENT -->
+<div class="card"><h2>Colaborare recomandată</h2>
+<p>{{engagement_intro}}</p>
+<p><strong>Servicii Allsoft mapate pe constatări:</strong></p>
+{{services_mapped}}
+<p><strong>Primele 90 de zile:</strong></p>
+{{first_90_days}}</div>
+
+<!-- 11. OPEN QUESTIONS -->
+<div class="card"><h2>Întrebări pentru prospect (intră în onboarding)</h2>
+<ul>{{open_questions}}
+<!-- ex: <li>...</li> --></ul></div>
+
+<!-- 12. SOURCES -->
+<footer>Surse: {{sources}}<br>Date publice; fără metrici fabricate — ipotezele sunt marcate. Generat la {{generated_at}}.</footer>
+</div></body></html>
