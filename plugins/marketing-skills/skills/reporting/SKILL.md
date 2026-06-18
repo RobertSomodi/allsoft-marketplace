@@ -77,6 +77,8 @@ English unless the user explicitly asks for English.
 
 Romanian, self-contained HTML in `assets/` — fill the `{{placeholders}}`:
 `raport-saptamanal.html` (weekly), `raport-lunar.html` (monthly),
-`audit.html` (SEO/CRO), and `INDEX.html` (the per-client report index). Inline
-CSS; Chart.js from CDN where a chart is needed. Copy the template, substitute
-values (ro-RO formatting, lei), and file to the canonical path.
+`audit.html` (SEO/CRO), `lead-brief.html` (the pre-sale Lead Assessment Brief —
+filed to `prospects/<slug>/brief.html`, driven by the `lead-scan` skill), and
+`INDEX.html` (the per-client report index). Inline CSS; Chart.js from CDN where a
+chart is needed. Copy the template, substitute values (ro-RO formatting, lei),
+and file to the canonical path.

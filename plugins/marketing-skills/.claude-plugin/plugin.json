@@ -1,7 +1,7 @@
 {
   "name": "marketing-skills",
-  "version": "0.2.0",
-  "description": "Full marketing toolkit (copywriting, CRO, SEO, ads, email, research, competitors, social, image, reporting, ecommerce analytics) plus a router agent, slash commands, and automation templates. Single front-door command (/mk). Romanian-first outputs and a strict per-client output filing standard. Reusable across all clients.",
+  "version": "0.3.0",
+  "description": "Full marketing toolkit (copywriting, CRO, SEO, ads, email, research, competitors, social, image, reporting, ecommerce analytics) plus a router agent, slash commands, and automation templates. Single front-door command (/mk). Two-tier workspace setup (agency root + clients) with lead intake. Romanian-first outputs and a strict output filing standard. Reusable across all agencies and clients.",
   "author": { "name": "Allsoft Agency" },
   "keywords": ["marketing", "copywriting", "seo", "cro", "ads", "email", "growth", "reporting", "romanian"]
 }
